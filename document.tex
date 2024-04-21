@@ -1,0 +1,99 @@
+\documentclass[10pt,twocolumn]{article}
+
+% use the oxycomps style file
+\usepackage{oxycomps}
+
+% usage: \fixme[comments describing issue]{text to be fixed}
+% define \fixme as not doing anything special
+\newcommand{\fixme}[2][]{#2}
+% overwrite it so it shows up as red
+\renewcommand{\fixme}[2][]{\textcolor{red}{#2}}
+% overwrite it again so related text shows as footnotes
+%\renewcommand{\fixme}[2][]{\textcolor{red}{#2\footnote{#1}}}
+
+% read references.bib for the bibtex data
+\bibliography{references}
+
+% include metadata in the generated pdf file
+\pdfinfo{
+    /Title (Tutorial Report)
+    /Author (Runpeng Li)
+}
+
+% set the title and author information
+\title{Tutorial Report}
+\author{Runpeng Li}
+\affiliation{Occidental College}
+\email{rli3@oxy.edu}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+\subsection{Project Overview}
+This project aims to develop a highly accurate music recommender system using Python, which is essential for the fast growing music industry. The system is designed to offer personalized music recommendations to users, thereby enhancing their listening experience, promoting emerging artists, and boosting overall music consumption. As the music industry continues to grow, the need for sophisticated recommender systems becomes increasingly critical. These systems not only help listeners discover new and appealing music but also play a crucial role in driving the industry's revenue by increasing user engagement and retention.
+
+\subsection{Relevance of the Tutorial}
+The tutorial by Velardo (2022) serves as a cornerstone for this project. It specifically addresses the creation of music recommender systems akin to those used by popular platforms like Spotify. This tutorial is particularly relevant as it delves into the use of collaborative filtering, a technique at the lead of modern recommender systems, which leverages user interaction data to predict further interests. The tutorial is not merely about learning to implement a technical solution but understanding the dynamics of user preferences and the statistical techniques to model these preferences effectively.
+
+\subsection{Collaborative Filtering and User-Item Matrix}
+A significant part of the tutorial focuses on the collaborative filtering process and the implementation of a user-item matrix. This matrix is crucial for understanding and predicting user behavior based on aggregate data from many users. By following the tutorial, the project adopts a similar approach but extends it by using a user-music matrix instead of the more typical user-artist matrix discussed in Velardo’s guide. This adaptation aims to enhance the specificity of recommendations, providing users with suggestions that are finely tuned to their individual music preferences rather than general artist-based suggestions.
+
+
+\subsection{Goals and Successful Outcome of the Tutorial}
+The primary goal of the tutorial, and by extension this project, is to achieve a successful outcome through the creation of a music recommender system that can accurately predict and suggest music based on individual user tastes. A successful outcome is not merely about building a working system but developing one that can scale effectively with the vast amount of data typically involved in music streaming services. The system should demonstrate a high degree of accuracy, as evidenced by low values of root mean square error (RMSE) in testing scenarios, indicating precise predictions of user preferences. Additionally, the system should be capable of handling implicit feedback and sparse data effectively, features that are critical for maintaining performance as the user base grows.
+
+
+\section{Method}
+\subsection{Introduction to Collaborative Filtering}
+In this project, the music recommender system was developed using a collaborative filtering technique, which is highly effective for creating personalized user experiences. Collaborative filtering analyzes user interactions within the system to predict potential musical interests based on similarities among users. This method assumes that if users A and B have shared interests in the past, they are likely to have similar preferences in the future. Such a strategy is particularly suitable for music recommendations, where individual tastes significantly influence user experience.
+
+\subsection{Customized Implementation of ALS}
+
+For this project, the Alternating Least Squares (ALS) algorithm was chosen as the primary method due to its robust handling of large-scale and sparse datasets, common in music listening services. According to Velardo (2022), ALS effectively addresses the complex overlapping issues prevalent in user-item matrices. By decomposing these large matrices into smaller matrices of latent factors, ALS simplifies the intricate relationships into dimensions that represent underlying user preferences and music characteristics.
+
+This algorithm is especially adept at integrating implicit feedback, such as play counts or listening durations, which do not require explicit user ratings. Incorporating such feedback enhances the accuracy of the recommendations, adapting to user behaviors that are typically unreported in traditional rating systems.
+
+\subsection{Rationale Behind Using a User-Music Matrix}
+
+Contrary to the user-artist matrix suggested by Velardo (2022), this project utilized a user-music matrix. This decision was driven by the goal to achieve a higher degree of personalization in the recommendations provided. By focusing on individual tracks rather than artists, the recommender system can offer music suggestions that more closely align with each user's specific tastes, rather than grouping preferences merely based on artist affiliation. This approach not only improves the precision of the recommendations but also helps in mitigating biases toward popular artists, thereby promoting a more diverse discovery of music.
+
+The user-music matrix records interactions at the track level, which, while denser, provides a nuanced view of user preferences that could be overlooked when aggregating data at the artist level.
+
+\subsection{Scalability and Data Management}
+
+The implementation of the ALS algorithm was further supported by data from the last.fm dataset, which contains extensive records of global music listening behaviors. The richness of this dataset provides a robust foundation for understanding a wide range of musical tastes and listening patterns, ensuring the system's recommendations are well-rounded and broadly applicable.
+
+Additionally, the project leveraged the implicit library, known for its functionalities tailored to handle implicit feedback effectively. This integration not only facilitated the processing of large datasets but also enhanced the system's capability to analyze and interpret user interactions efficiently, thus supporting the scalability and responsiveness of the recommender system.
+
+By adopting the ALS algorithm in conjunction with a user-music matrix approach, this project successfully addresses the typical challenges associated with scale and data sparsity in music recommendation. The methods employed ensured that the system could dynamically adapt to the continuously evolving preferences of users, maintaining high accuracy and relevance in its music recommendations. This approach demonstrates a significant advancement over traditional methods, aligning closely with the practical needs and behaviors of modern digital music consumers.
+
+\section{Evaluation}
+\subsection{Quantitative Metrics}
+
+The effectiveness of the music recommender system developed in this project is primarily quantitatively assessed using the Root Mean Square Error (RMSE). RMSE serves as a crucial metric, quantifying the average magnitude of the error between the values predicted by the model and the actual values observed. A lower RMSE value is indicative of higher accuracy in predicting user preferences for music tracks, which aligns with the project's objective to develop a precise recommendation tool.
+
+In addition to RMSE, the system's robustness and reliability are further evaluated using precision, recall, and the F1-score. Precision measures the proportion of recommended songs that users found relevant, indicating the accuracy of the system in selecting content that aligns with user preferences. Recall evaluates the proportion of relevant songs that were recommended by the system, reflecting the system's effectiveness in identifying a comprehensive set of items that meet user tastes. The F1-score harmonizes these metrics, providing a singular measure of the overall quality of the recommendations by balancing the precision and recall. These metrics are essential for assessing the system's performance in real-world scenarios, where the accuracy and relevance of recommendations are critical for user satisfaction.
+
+\subsection{User Evaluation Method}
+To complement these quantitative metrics, a user evaluation method plays a pivotal role in assessing the system's effectiveness from the perspective of the end-users. This involves gathering direct feedback from users through structured surveys and interviews designed to capture their subjective evaluations of the system's performance. These surveys are distributed to a representative sample of users after they have interacted with the recommender system for a sufficient period.
+
+The surveys include questions that gauge users' satisfaction with the recommendations received, the diversity of music suggested, and the overall usability of the system. Users are asked to rate various aspects of their experience on a Likert scale, and open-ended questions are included to collect qualitative feedback on what users enjoyed or felt could be improved. This feedback is invaluable for understanding how well the system meets real-world needs and expectations.
+
+Additionally, analyzing user interaction data is another significant component of the user evaluation. By examining logs of user interactions with the system, such as tracks played, skipped, and saved to playlists, insights can be gained into the actual user behavior beyond self-reported data. This analysis helps identify patterns that indicate satisfaction or dissatisfaction, such as repeat listens or frequent skipping of recommended songs.
+
+\subsection{Practical Value to End-Users}
+
+This user-centric evaluation approach ensures that the music recommender system not only meets technical performance benchmarks but also delivers practical value to end-users. By integrating both quantitative metrics and qualitative user feedback, the project can holistically evaluate the system's performance. This comprehensive understanding allows for targeted improvements, enhancing the system's ability to provide highly relevant and enjoyable music recommendations, thereby improving user engagement and satisfaction. This alignment of technical capabilities with user satisfaction is fundamental in evolving the system to better serve its audience, ensuring its long-term success and relevance in the competitive landscape of music streaming services.
+
+
+
+\section{Reflection}
+
+Following the tutorial by Velardo (2022) has provided substantial theoretical knowledge and practical skills necessary for building advanced music recommender systems using Python and collaborative filtering techniques. The tutorial was significant in navigating the challenges associated with large data sets and the implementation of sophisticated algorithms like Alternating Least Squares (ALS).
+Despite the technical successes, concerns regarding inclusivity and fairness of the system remain. Recommendation systems can inadvertently perpetuate existing biases from the training data, necessitating ongoing efforts to identify and mitigate such biases. Additionally, the system's ability to adapt to rapidly changing music trends and user preferences is critical, requiring continuous updates and maintenance to maintain relevance and user engagement.
+Reflecting on the project, it is evident that significant progress has been made towards developing a technically proficient music recommender system. This endeavor has not only advanced understanding of complex machine learning algorithms but has also highlighted the ethical considerations necessary when deploying AI-driven technologies in influential sectors like music consumption. The project underscores the importance of balancing technical proficiency with ethical responsibility to ensure that AI applications are both effective and equitable.
+
+
+\end{document}
